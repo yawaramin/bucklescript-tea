@@ -2,6 +2,8 @@ open Vdom
 
 module Cmds = Tea_html_cmds
 
+type 'msg elem = ?key:string -> ?unique:string -> 'msg Vdom.properties -> 'msg Vdom.t list -> 'msg Vdom.t
+
 (* let map lift vdom =
    *)
 

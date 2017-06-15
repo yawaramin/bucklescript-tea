@@ -232,8 +232,7 @@ let programLoop update view subscriptions initModel initCmd = function
     }
 
 
-let program : ('flags, 'model, 'msg) program -> Web.Node.t Js.null_undefined -> 'flags -> 'msg programInterface =
-  fun {init; update; view; subscriptions; shutdown} pnode flags ->
+let program {init; update; view; subscriptions; shutdown} pnode flags =
   let () = Web.polyfills () in
   let initModel, initCmd = init flags in
   let opnode = Js.Null_undefined.to_opt pnode in
@@ -252,8 +251,7 @@ let standardProgram : ('flags, 'model, 'msg) standardProgram -> Web.Node.t Js.nu
     } pnode args
 
 
-let beginnerProgram : ('model, 'msg) beginnerProgram -> Web.Node.t Js.null_undefined -> unit -> 'msg programInterface =
-  fun {model; update; view} pnode () ->
+let beginnerProgram {model; update; view} pnode () =
     standardProgram {
       init = (fun () -> (model, Tea_cmd.none));
       update = (fun model msg -> (update model msg, Tea_cmd.none));

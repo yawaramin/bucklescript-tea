@@ -488,7 +488,7 @@ let wrapCallbacks func callbacks =
     { enqueue = (fun msg -> !callbacks.enqueue (func msg))
     }
 
-let map : ('a -> 'b) -> 'a t -> 'b t = fun func vdom ->
+let map func vdom =
   let tagger callbacks =
     ref
       { enqueue = (fun msg -> !callbacks.enqueue (func msg))
